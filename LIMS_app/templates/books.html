@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %} 
+<div class="row-md-12" style="margin-top: 20px;">
+    <h3>{{books|length}} books added.</h3>
+</div>
+{% for book in books %}
+<div class="container"
+style="margin: 0;
+      padding: 2px;
+      display: inline-block;
+      height: 200px;
+      width: 200px;
+      ">
+  <div class="col">
+    <div class="row">
+      <div class="card h-100 ">
+        <a href="{{ book.link }}" target="_blank" >
+          <img src="{{ book.image.url }}" alt="{{ book.title }}" style="width:150px;">
+        </a>
+        <div class="card-body">
+          <h4 class="title">Title:{{ book.title }}</h4>
+          <p class="card-text">About: {{ book.description }}</p>
+          <p class="card-text">Author: {{ book.author }}</p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+{% endblock content %}

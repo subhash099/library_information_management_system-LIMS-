@@ -1,0 +1,78 @@
+{% extends "index.html" %}
+
+{% load static %}
+{% block content %}
+    
+    {% if success %}
+    <div class="alert alert-success" role="alert">
+      Congratulations!!! The Reader is Updated Successfully..
+        <a href="{% url 'readers' %}" class="btn btn-success">Back</a>
+    </div>
+    {% else %}
+    <div class="row">   
+            <div class="card-body">
+                <form action="" method="POST" >
+                  <div class="card-header align-items-center" >
+                    <h3>Update Readers</h3>
+                  </div>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="form-group">
+                        
+
+                        <button type="submit" class="btn btn-primary" href="{% url 'readers' %}">Update</button>
+                        <a href="{% url 'readers' %}" class="btn btn-danger">cancle</a>
+                    </div>
+                </form>
+            </div>
+
+    </div>
+    {% endif %}
+
+ <style>
+    .row{
+        background-image: url("{% static 'assets/img/library_1.jpg' %}");
+        background-size: cover;
+        background-attachment: local;
+        height: auto;
+        display: flex;
+        margin: 0 ;
+
+
+    }
+    .card-body{
+        background-color: rgba(255, 255, 255, 0.167); /* Semi-transparent white */
+            padding: 20px;
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+            position: relative;
+            display: grid;
+            margin: 10px 0 5px;
+            align-items: center;
+            justify-content: center;
+    }
+    .card-header{
+        background-color: #fff;
+        color: black;
+        text-align: center;
+    }
+    .form-group {
+      margin-bottom: 15px;
+      width: 500px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: rgb(20, 20, 20);
+    }  
+
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border-radius: 20px;
+    }
+
+  </style>
+{% endblock content %}

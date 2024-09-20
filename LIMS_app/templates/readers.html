@@ -1,0 +1,126 @@
+{% extends "index.html" %} {% block content %}
+
+<div
+  class="container-flex text-center justify-content-center align-items_center"
+  style="padding-top: 1px"
+>
+  <div
+    class="row justify-content-center align-middle"
+    style="margin-top: 10px; height: 63px;align-items: center;"
+  >
+    <div class="col-md-8">
+      <a href="{% url 'readers' %}" class="btn btn-primary">All Readers</a>
+    </div>
+    <div class="col-6 col-md-4">
+      <a href="{% url 'add' %}" class="btn btn-success">Add New Readers</a>
+    </div>
+  </div>
+  <div class="row">
+ <div class="col-md-12">
+        <div class="row">
+          <nav class="navbar bg-body-light">
+            <div class="container-fluid justify-content-center align-items-center">
+              <form class="d-flex" role="search" action="{% url 'readers' %}" method="POST">
+                {% csrf_token %}
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  name="query"
+                  value="{{query}}"
+                />
+                <button class="btn btn-outline-primary" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+          </nav>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+           <p>{{readers|length}} readers subscribed.</p>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="container" style="overflow-y: auto; height: 400px;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>Reader ID</td>
+                            <td>Name</td>
+                            <td>Contact</td>
+                            <td>Card_no</td>
+                            <td>Address</td> 
+                            <td>Numbers of books</td> 
+                            <td>Books_Taken_at</td> 
+                            <td>Book_returned_at</td> 
+                            <td>Books</td> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reader in readers %}
+                        <tr>
+                            <td>{{reader.id}}</td>
+                              <td>
+                                {% if reader.active %}
+                                <button type="button" class="btn btn-success" href="{% url 'readers_info' reader.id %}" data-bs-toggle="modal" data-bs-target="#myModal{{reader.reader_name}}">{{reader.reader_name}}
+                                </button>
+                                {% else %}
+                                <button type="button" class="btn btn-danger" href="{% url 'readers_info' reader.id %}" data-bs-toggle="modal" data-bs-target="#myModal{{reader.reader_name}}">{{reader.reader_name}}
+                                </button>
+                                {% endif %}
+                              </td>
+
+                              <div class="modal" id="myModal{{reader.reader_name}}" tabindex="-1" aria-labelledby="myModal" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title">
+                                        READERS INFORMATION
+                                      </h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"></span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <ul class="list-unstyled">
+                                        <li>Reader_Name: <strong>{{reader.reader_name}}</strong></li>
+                                        <li>Reader_ID: <strong>{{reader.id}}</strong></li>
+                                        <li>Card_no: <strong>{{reader.card_no}}</strong></li>
+                                        <li>Reader_contact: <strong>{{reader.reader_contact}}</strong></li>
+                                        <li>Reader_address: <strong>{{reader.reader_address}}</strong></li>
+                                        <li>Numbers_of_books: <strong>{{reader.number_of_books}}</strong></li>
+                                        <li>Book_Name: <strong>{{reader.Books}}</strong></li>
+                                        <li>Books_Taken_at: <strong>{{reader.book_taken_at}}</strong></li>
+                                        <li>Books_returned_at: <strong>{{reader.book_returned_at}}</strong></li>
+                                        <li>Status: <strong>{{reader.active}}</strong></li>
+                                      </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <div class="modal-footer">
+                                      <a href="{% url 'edit' reader.id %}" class="btn btn-success">Update</a>
+                                      <form action="{% url 'deletereaders' reader.id %}" method="POST">
+                                        {% csrf_token %}
+                                       <input type="submit" class="btn btn-danger" value="Delete">
+                                      </form>
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <td>{{reader.reader_contact}}</td>
+                            <td>{{reader.card_no}}</td>
+                            <td>{{reader.reader_address}}</td>
+                            <td>{{reader.number_of_books}}</td>
+                            <td>{{reader.book_taken_at}}</td>
+                            <td>{{reader.book_returned_at}}</td>
+                            <td>{{reader.Books}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

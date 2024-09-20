@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <img src="static/assets/img/library.avif" class="rounded float-start" alt="LIMS" height="200">
+        <h1>Hello,Readers!</h1>
+        <p>welcome to city library, we have large collection and updated books cater the reading needs of all kinds of readers
+        </p>
+        <p>
+        <a role="button" href="/books" class="btn btn-primary btn-lg">Browse our collections >></button></a>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>why reading is important?</h3>
+        <p>Reading is important because it enhances knowledge, stimulates mental growth, and improves critical thinking skills. It exposes individuals to different perspectives, cultures, and ideas, broadening their understanding of the world. Regular reading strengthens language and communication abilities, enriching vocabulary and improving writing skills. Additionally, it boosts cognitive functions such as concentration, focus, and memory retention. 
+        </p>
+      </div>
+      <div class="col">
+        <h3>Key Benefits</h3>
+        <ul>
+            <li>Access to a Wide Range of Resources</li>
+            <li>Quiet Study and Work Environment</li>
+            <li>Support for Academic and Personal Research</li>
+            <li>Mental Well-being</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Thought of the day!</h3>
+        <p>"The only limit to our realization of tomorrow is our doubts of today."<br>
+            "Success is not final, failure is not fatal: It is the courage to continue that counts."
+        </p>
+      </div>
+    </div>
+</div>
+<div class="map">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3358.6135600189505!2d85.37658947525253!3d27.67262257620254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb1ba8b5721ae5%3A0x599ed960c557c8c!2sChardobato%2C%20Sundarbasti!5e1!3m2!1sen!2snp!4v1726304114295!5m2!1sen!2snp"     height="400px" width="100%" style=" padding:0;margin:0;"  loading="lazy" ></iframe>
+</div>
+<style>
+  .map{
+    width: 100%;
+  }
+</style>
+{% include "footer.html" %}
+{% endblock content %}
